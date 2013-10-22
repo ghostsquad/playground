@@ -1,4 +1,4 @@
-﻿namespace CodingPractice.DataStructures
+﻿namespace WesToolbox.DataStructures
 {
     public interface IPriorityQueue<T> : IQueue<T>
     {

@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingPractice", "CodingPractice\CodingPractice.csproj", "{A1EE7551-BED7-437B-BC33-34DEFB346451}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toolbox", "Toolbox\Toolbox.csproj", "{A1EE7551-BED7-437B-BC33-34DEFB346451}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingPractice.Test", "CodingPractice.Test\CodingPractice.Test.csproj", "{14E41A5D-614B-4E3E-9D60-984D03155396}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toolbox.Test", "Toolbox.Test\Toolbox.Test.csproj", "{58895E7E-0175-4108-AE3C-B940E6CEAFD2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +15,10 @@ Global
 		{A1EE7551-BED7-437B-BC33-34DEFB346451}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1EE7551-BED7-437B-BC33-34DEFB346451}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1EE7551-BED7-437B-BC33-34DEFB346451}.Release|Any CPU.Build.0 = Release|Any CPU
-		{14E41A5D-614B-4E3E-9D60-984D03155396}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{14E41A5D-614B-4E3E-9D60-984D03155396}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{14E41A5D-614B-4E3E-9D60-984D03155396}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{14E41A5D-614B-4E3E-9D60-984D03155396}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58895E7E-0175-4108-AE3C-B940E6CEAFD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58895E7E-0175-4108-AE3C-B940E6CEAFD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58895E7E-0175-4108-AE3C-B940E6CEAFD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58895E7E-0175-4108-AE3C-B940E6CEAFD2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

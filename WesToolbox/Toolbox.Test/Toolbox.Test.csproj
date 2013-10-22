@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{14E41A5D-614B-4E3E-9D60-984D03155396}</ProjectGuid>
+    <ProjectGuid>{58895E7E-0175-4108-AE3C-B940E6CEAFD2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CodingPractice.Test</RootNamespace>
-    <AssemblyName>InterviewPractice.Test</AssemblyName>
+    <RootNamespace>WesToolbox.Test</RootNamespace>
+    <AssemblyName>WesToolbox.Test</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -53,13 +53,16 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="PriorityQueueTests.cs" />
+    <Compile Include="DataStructures\PriorityQueueTests.cs" />
+    <Compile Include="DataStructures\MapTests.cs" />
+    <Compile Include="HelperClasses\Conversions.Test.cs" />
+    <Compile Include="HelperClasses\SortingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CodingPractice\CodingPractice.csproj">
-      <Project>{A1EE7551-BED7-437B-BC33-34DEFB346451}</Project>
-      <Name>CodingPractice</Name>
+    <ProjectReference Include="..\Toolbox\Toolbox.csproj">
+      <Project>{a1ee7551-bed7-437b-bc33-34defb346451}</Project>
+      <Name>Toolbox</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

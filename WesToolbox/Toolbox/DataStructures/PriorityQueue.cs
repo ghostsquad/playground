@@ -1,4 +1,4 @@
-﻿namespace CodingPractice.DataStructures
+﻿namespace WesToolbox.DataStructures
 {
     using System;
     using System.Collections;
@@ -12,6 +12,8 @@
 
         private readonly List<byte> priorityIndex;
 
+        private bool isSorted = true;
+
         #endregion
 
         #region Constructors and Destructors
@@ -23,7 +25,8 @@
             this.DefaultPriority = defaultPriority;
         }
 
-        public PriorityQueue() : this(0)
+        public PriorityQueue()
+            : this(0)
         {
         }
 
@@ -34,9 +37,9 @@
         public int Count { get; private set; }
 
         public byte DefaultPriority { get; set; }
-        
+
         public bool IsSynchronized { get; private set; }
-        
+
         public object SyncRoot { get; private set; }
 
         #endregion
@@ -45,7 +48,24 @@
 
         public void CopyTo(Array array, int index)
         {
-            throw new NotImplementedException();
+            if (array == null)
+            {
+                throw new ArgumentNullException("array is null.");
+            }
+
+            if (index < 0)
+            {
+                throw new ArgumentOutOfRangeException("index is less than 0.");
+            }
+
+            int spaceRemaining = array.Length - index;
+
+            if (spaceRemaining < this.Count)
+            {
+                throw new ArgumentException("not enough space in array.");
+            }
+
+            this.GetAllQueueObjectsInOrder().ToArray().CopyTo(array, index);
         }
 
         public T Dequeue()
@@ -84,11 +104,13 @@
                 thePrioritizedQueue.Enqueue(obj);
                 this.objectStorage.Add(priority, thePrioritizedQueue);
             }
+
+            this.isSorted = false;
         }
 
         public IEnumerator GetEnumerator()
         {
-            throw new NotImplementedException();            
+            return this.GetAllQueueObjectsInOrder().GetEnumerator();
         }
 
         public T Peek()
@@ -101,6 +123,18 @@
 
         #region Methods
 
+        private List<T> GetAllQueueObjectsInOrder()
+        {
+            var queuedObjects = new List<T>();
+            this.SortPriorityIndexIfNecessary();
+            foreach (byte priority in this.priorityIndex)
+            {
+                queuedObjects.AddRange(this.objectStorage[priority]);
+            }
+
+            return queuedObjects;
+        }
+
         private Queue<T> GetHighestPrioritizedQueue()
         {
             if (this.priorityIndex.Count == 0)
@@ -108,9 +142,19 @@
                 throw new InvalidOperationException("Queue is empty.");
             }
 
-            this.priorityIndex.Sort();
+            this.SortPriorityIndexIfNecessary();
+
             byte highestPriority = this.priorityIndex[0];
             return this.objectStorage[highestPriority];
+        }
+
+        private void SortPriorityIndexIfNecessary()
+        {
+            if (!this.isSorted)
+            {
+                this.priorityIndex.Sort();
+                this.isSorted = true;
+            }
         }
 
         #endregion
