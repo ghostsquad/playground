@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kakuro", "Kakuro\Kakuro.csproj", "{80C295CF-26A2-42D0-9CA5-AA24A78014F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kakuro.Test", "KakuroHelper.Test\Kakuro.Test.csproj", "{EF4CB0ED-F3AD-4059-A498-3949459AB035}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kakuro.Test", "Kakuro.Test\Kakuro.Test.csproj", "{EF4CB0ED-F3AD-4059-A498-3949459AB035}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{20C0D2CB-A370-4B88-A8E8-000E9178F5C9}"
 EndProject
