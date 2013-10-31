@@ -2,16 +2,15 @@
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class InPlaceQuickSorterTests
+    public class InPlaceCocktailBubbleSorterTests
     {
         #region Static Fields
 
-        private static readonly Type SorterType = typeof(InPlaceQuickSorter);
+        private static readonly Type SorterType = typeof(InPlaceCocktailBubbleSorter);
 
         #endregion
 

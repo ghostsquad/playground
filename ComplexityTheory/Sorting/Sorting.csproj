@@ -39,7 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InPlaceBubbleSorter.cs" />
+    <Compile Include="Common.cs" />
+    <Compile Include="InPlaceCocktailBubbleSorter.cs" />
     <Compile Include="InPlaceQuickSorter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

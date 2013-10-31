@@ -4,17 +4,19 @@
     using System.Collections.Generic;
 
     /// <summary>
-    /// For the Brown/Black Hat Reference:
-    /// http://www.youtube.com/watch?v=ywWBy6J5gz8
+    ///     For the Brown/Black Hat Reference:
+    ///     http://www.youtube.com/watch?v=ywWBy6J5gz8
     /// </summary>
     public static class InPlaceQuickSorter
     {
+        #region Public Methods and Operators
+
         public static void InPlaceQuickSort<T>(this IList<T> collection)
         {
             InPlaceQuickSort(collection, Comparer<T>.Default);
         }
 
-        public static void InPlaceQuickSort<T>(this IList<T> collection, Comparer<T> comparer)
+        public static void InPlaceQuickSort<T>(this IList<T> collection, IComparer<T> comparer)
         {
             if (collection == null)
             {
@@ -26,68 +28,55 @@
                 throw new ArgumentNullException("comparer");
             }
 
-            InPlaceQuickSortInternal(collection, comparer, 0, collection.Count - 1);            
+            if (collection.Count < 2)
+            {
+                return;
+            }
+
+            InPlaceQuickSortInternal(collection, comparer, 0, collection.Count - 1);
         }
 
-        private static void InPlaceQuickSortInternal<T>(IList<T> collection, Comparer<T> comparer, int indexStart, int indexEnd)
-        {
-            var blackHatIndex = indexStart;
-            var blackHat = collection[blackHatIndex];
+        #endregion
 
-            var brownHatIndex = indexEnd;
-            var brownHat = collection[brownHatIndex];
+        #region Methods
+
+        private static void InPlaceQuickSortInternal<T>(
+            IList<T> collection, 
+            IComparer<T> comparer, 
+            int indexStart, 
+            int indexEnd)
+        {
+            int blackHatIndex = indexStart;
+            int brownHatIndex = indexEnd;
 
             while (brownHatIndex != blackHatIndex)
             {
-                var comparisonResult = comparer.Compare(brownHat, blackHat);
+                T brownHat = collection[brownHatIndex];
+                T blackHat = collection[blackHatIndex];
+
+                int comparisonResult = comparer.Compare(brownHat, blackHat);
 
                 if (comparisonResult == 0)
                 {
-                    if (brownHatIndex < blackHatIndex)
-                    {
-                        brownHatIndex++;
-                        brownHat = collection[brownHatIndex];
-                    }
-                    else
-                    {
-                        brownHatIndex--;
-                        brownHat = collection[brownHatIndex];
-                    }
+                    brownHatIndex += brownHatIndex < blackHatIndex ? 1 : -1;
                 }
                 else if (comparisonResult > 0)
                 {
                     if (brownHatIndex < blackHatIndex)
-                    {                        
-                        collection[brownHatIndex] = blackHat;
-                        collection[blackHatIndex] = brownHat;
-                        var tempIndex = blackHatIndex;
-                        blackHatIndex = brownHatIndex;
-                        brownHatIndex = tempIndex;
-                        brownHatIndex--;
-                        brownHat = collection[brownHatIndex];
-                    }
-                    else
                     {
-                        brownHatIndex--;
-                        brownHat = collection[brownHatIndex];
+                        collection.Swap(ref brownHatIndex, ref blackHatIndex);
                     }
+
+                    brownHatIndex--;
                 }
                 else if (comparisonResult < 0)
                 {
                     if (brownHatIndex > blackHatIndex)
-                    {                        
-                        collection[brownHatIndex] = blackHat;                     
-                        collection[blackHatIndex] = brownHat;
-                        var tempIndex = blackHatIndex;
-                        blackHatIndex = brownHatIndex;
-                        brownHatIndex = tempIndex;                        
-                        brownHatIndex++;                        
-                    }
-                    else
                     {
-                        brownHatIndex++;
-                        brownHat = collection[brownHatIndex];
+                        collection.Swap(ref brownHatIndex, ref blackHatIndex);
                     }
+
+                    brownHatIndex++;
                 }
                 else
                 {
@@ -95,18 +84,20 @@
                 }
             }
 
-            var leftEnd = blackHatIndex - 1;
-            var rightStart = blackHatIndex + 1;
+            int leftEnd = blackHatIndex - 1;
+            int rightStart = blackHatIndex + 1;
 
             if (blackHatIndex > 0 && leftEnd >= indexStart)
             {
                 InPlaceQuickSortInternal(collection, comparer, indexStart, leftEnd);
             }
-            
+
             if (blackHatIndex < collection.Count - 1 && rightStart <= indexEnd)
             {
                 InPlaceQuickSortInternal(collection, comparer, rightStart, indexEnd);
             }
-        }        
+        }
+
+        #endregion
     }
 }
