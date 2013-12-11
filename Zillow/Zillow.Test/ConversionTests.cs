@@ -38,24 +38,6 @@
         }
 
         [TestMethod]
-        public void GivenZillowTestWhenTryParseExpectLong()
-        {
-            // act
-            var actual = Conversions.StringToLong(BasicValue, Conversions.ConversionMethods.TryParse);
-
-            // assert
-            Assert.AreEqual<long>(BasicExpected, actual);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(NotImplementedException))]
-        public void GivenNotImplementedMethodExpectException()
-        {
-            // act
-            Conversions.StringToLong(BasicValue, Conversions.ConversionMethods.NotImplementedMethod);
-        }
-
-        [TestMethod]
         public void GivenLongMaxValue()
         {
             // arrange
@@ -180,6 +162,22 @@
         }
 
         [TestMethod]
+        [ExpectedException(typeof(NotImplementedException))]
+        public void GivenNullConversionMethodExpectException()
+        {
+            // act
+            Conversions.StringToLong(BasicValue, (Conversions.ConversionMethods)int.MaxValue);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void GivenNullWhenIndividualIntegersExpectException()
+        {
+            // act
+            Conversions.StringToLong(null);
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void GivenIncorrectDoubleNegativeFormatWhenRoundedExpectException()
         {
@@ -191,14 +189,11 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void GivenIncorrectDoubleNegativeFormatWhenTryParseExpectException()
-        {
-            // arrange
-            var value = "--1";
-
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void GivenNullWhenRoundedExpectException()
+        {            
             // act
-            Conversions.StringToLong(value, Conversions.ConversionMethods.TryParse);
+            Conversions.StringToLong(null, Conversions.ConversionMethods.Rounded);
         }
 
         [TestMethod]

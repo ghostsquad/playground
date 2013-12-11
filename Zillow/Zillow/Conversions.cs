@@ -32,24 +32,12 @@
             /// <summary>
             ///     The individual integers conversion method.
             /// </summary>
-            IndividualIntegers, 
-
-            /// <summary>
-            ///     The try parse method.
-            /// </summary>
-            TryParse, 
+            IndividualIntegers,
 
             /// <summary>
             ///     The rounded method.
             /// </summary>
-            Rounded, 
-
-            /// <summary>
-            ///     The not implemented method. I'm adding this as a way to demonstrate the extensibility of this class
-            ///     that all enum values require an entry in the switch statement.
-            ///     Alternatives to this is to implement the Strategy pattern.
-            /// </summary>
-            NotImplementedMethod
+            Rounded
         }
 
         /// <summary>
@@ -100,6 +88,11 @@
         /// </returns>
         public static long StringToLong(string value, ConversionMethods conversionMethod)
         {
+            if (string.IsNullOrEmpty(value))
+            {
+                throw new ArgumentNullException("value");    
+            }
+
             switch (conversionMethod)
             {
                 case ConversionMethods.IndividualIntegers:
@@ -110,12 +103,7 @@
                 case ConversionMethods.Rounded:
                     {
                         return Rounded(value);
-                    }
-
-                case ConversionMethods.TryParse:
-                    {
-                        return TryParse(value);
-                    }
+                    }                
 
                 default:
                     {
@@ -182,7 +170,7 @@
                     {
                         var exponent = (value.Length - 1) - i;
                         long operand = digit * (long)Math.Pow(10, exponent);
-                        newLong = performOperation(newLong, operand, operation);
+                        newLong = PerformOperation(newLong, operand, operation);
                     }
                 }
                 catch (OverflowException)
@@ -218,32 +206,7 @@
             }
 
             return IndividualIntegers(value.Split(new[] { '.' })[0]);
-        }
-
-        /// <summary>
-        /// Uses long.TryParse to convert a string to a long.
-        /// </summary>
-        /// <param name="value">
-        /// The value.
-        /// </param>
-        /// <returns>
-        /// The <see cref="long"/>.
-        /// </returns>
-        /// <exception cref="ArgumentException">
-        /// If the string value cannot be parsed to a long value type.
-        /// </exception>
-        private static long TryParse(string value)
-        {
-            long newLong;
-            bool parseResult = long.TryParse(value, out newLong);
-
-            if (!parseResult)
-            {
-                throw new ArgumentException("Value cannot be parsed to a value type long.");
-            }
-
-            return newLong;
-        }
+        }        
 
         /// <summary>
         /// The perform operation.
@@ -260,20 +223,17 @@
         /// <returns>
         /// The <see cref="long"/>.
         /// </returns>
-        private static long performOperation(long num1, long num2, MathOperations operation)
+        private static long PerformOperation(long num1, long num2, MathOperations operation)
         {
-            if (operation == MathOperations.Addition)
+            checked
             {
-                checked
+                if (operation == MathOperations.Addition)
                 {
                     return num1 + num2;
                 }
-            }
 
-            checked
-            {
                 return num1 - num2;
-            }
+            }        
         }
 
         #endregion
