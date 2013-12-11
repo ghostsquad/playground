@@ -1,6 +1,7 @@
 ﻿namespace Zillow.Test
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -9,6 +10,7 @@
     using Ploeh.AutoFixture;
 
     [TestClass]
+    [ExcludeFromCodeCoverage]
     public class ConversionTests
     {
         private const long BasicExpected = 123;
@@ -157,6 +159,15 @@
             Conversions.StringToLong(value);
         }
 
+        public void GivenIncorrectDoubleDecimalFormatWhenRoundedExpectException()
+        {
+            // arrange
+            var value = "123.456.789";
+
+            // act
+            Conversions.StringToLong(value, Conversions.ConversionMethods.Rounded);
+        }
+
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void GivenIncorrectDoubleNegativeFormatWhenIndividualIntegersExpectException()
@@ -166,6 +177,28 @@
 
             // act
             Conversions.StringToLong(value);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void GivenIncorrectDoubleNegativeFormatWhenRoundedExpectException()
+        {
+            // arrange
+            var value = "--1";
+
+            // act
+            Conversions.StringToLong(value, Conversions.ConversionMethods.Rounded);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void GivenIncorrectDoubleNegativeFormatWhenTryParseExpectException()
+        {
+            // arrange
+            var value = "--1";
+
+            // act
+            Conversions.StringToLong(value, Conversions.ConversionMethods.TryParse);
         }
 
         [TestMethod]

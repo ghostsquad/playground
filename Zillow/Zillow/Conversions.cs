@@ -165,7 +165,17 @@
 
             for (int i = startPosition; i < value.Length; i++)
             {
-                var digit = int.Parse(value[i].ToString());
+                // http://www.alanwood.net/demos/ansi.html
+                // char     ansi/unicode number
+                // 0        48
+                // 1        49
+                // ...
+                // 9        57
+                // therefore
+                // example:
+                // "9" = 57 - 48 = 9
+                // "0" = 48 - 48 = 0
+                var digit = (int)value[i] - 48;
                 try
                 {
                     checked
